@@ -1,0 +1,1 @@
+<input {if $but_id}id="{$but_id}"{/if} class="btn replain-btn-{$but_role}" type="{$but_type|default:"submit"}"{if $but_name} name="{$but_name}"{/if} value="{$but_text}" {if $but_target_form} data-ca-target-form="{$but_target_form}"{/if}{if $but_target_id} data-ca-target-id="{$but_target_id}"{/if} {if $but_disabled}disabled="disabled"{/if}  />
