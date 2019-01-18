@@ -16,49 +16,24 @@ if (!defined('BOOTSTRAP')) { die('Access denied'); }
 
 use Tygh\Settings;
 use Tygh\Registry;
-use Tygh\Http;
-use Tygh\Replain\BuildUrl;
 
 function fn_get_replain_settings() 
 {
-   $available_languages = [ 
-            'English'                   => 0,
-            'Русский'                   => 1,
-            'Español'                   => 2,
-            'Farsi'                     => 3,
-            'Português'                 => 4,
-            'Arabic'                    => 5,
-            'Deutsch'                   => 6,
-            'Bahasa Indonesia'          => 7,
-            'Oʻzbek tili'               => 8,
-            'italiano'                  => 9,
-            __('replain.autodetection') => -1
-            ];
-
     $replain_settings = fn_get_replain_addon_settings();
-    $replain_settings['available_languages'] = $available_languages;
 
     return $replain_settings;
 }
 
 function fn_replain_create_chat($replain_settings)
 {
-    if (isset($replain_settings['general']['raw_key'])) {
-        preg_match('/([a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12})/', $replain_settings['general']['raw_key'], $matches);
-        unset($replain_settings['general']['raw_key']);
-        if($matches) {
-            $replain_settings['general']['id'] = $matches[1];
-        }
-    } else {
-        $replain_settings = [];
-        $replain_settings['general']['secret_key'] = substr(md5(serialize(rand())), 0, 13); //agreed with Re:plain team on 13 symbols for the secret key
+    if (isset($replain_settings['general']['script'])) {
+        fn_update_replain_settings($replain_settings);
     }
-    fn_update_replain_settings($replain_settings);
-    return isset($replain_settings['general']['secret_key']) ? $replain_settings['general']['secret_key'] : true;
 }
 
 function fn_delete_replain_chat() {
     $addon_settings = fn_get_replain_addon_settings();
+
     foreach ($addon_settings['general'] as $k => $v) {
         $addon_settings['general'][$k]['value'] = '';
     }
@@ -111,50 +86,6 @@ function fn_get_replain_addon_settings ()
         unset($replain_settings['general'][$k]);
         $replain_settings['general'][$v['name']] = $v;
     }
-    
+
     return $replain_settings;
-}
-
-function fn_check_key($key) 
-{
-    $addon_settings = fn_get_replain_addon_settings();
-
-    if (!empty($addon_settings['general']['secret_key']['value'])) {
-        if($addon_settings['general']['secret_key']['value'] == $key) {
-            $replain_settings['general']['secret_key'] = '';
-
-            fn_update_replain_settings($replain_settings);
-            
-            return true;
-        } else {
-            $replain_settings['general']['secret_key'] = '';
-            fn_update_replain_settings($replain_settings);
-            return false;
-        }
-    } else {
-        $replain_settings['general']['secret_key'] = '';
-        fn_update_replain_settings($replain_settings);
-        return false;
-    }
-}
-
-function fn_replain_get_url_setings() 
-{
-    $is_url_suitable = true;
-    $protocol = (Registry::get('settings.Security.secure_storefront') == 'full') ? 1 : 2;
-    if ($protocol === 1) {
-        $storefront_array = explode('/', Registry::get('runtime.company_data.secure_storefront'));
-    } else {
-        $storefront_array = explode('/', Registry::get('runtime.company_data.storefront'));
-    }
-
-    $storefront_domain = array_shift($storefront_array);
-    $domain_builder = new BuildUrl($storefront_domain);
-    $domain_builder->punyEncode();
-    $domain_builder->prepareDomain();
-    $storefront_domain = $domain_builder->getPreparedUrl();
-
-    $storefront_path = urlencode(implode("_", $storefront_array));
-
-    return array($protocol, $storefront_domain, $storefront_path);
 }

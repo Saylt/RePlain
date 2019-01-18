@@ -15,11 +15,7 @@
         <sections>
             <section id="general">
                 <items>
-                    <item id="id">
-                        <type>hidden</type>
-                        <default_value></default_value>
-                    </item>
-                    <item id="secret_key">
+                    <item id="script">
                         <type>hidden</type>
                         <default_value></default_value>
                     </item>
