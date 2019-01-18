@@ -17,18 +17,10 @@ use Tygh\Registry;
 
 if (!defined('BOOTSTRAP')) { die('Access denied'); }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if ($mode == 'activate' && isset($_REQUEST['key'])) {
-        if (fn_check_key($_REQUEST['key'])) {
-            exit();
-        }
-    }
-}
-
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if ($mode == 'set_id' && isset($_REQUEST['key']) && isset($_REQUEST['id'])) {
-        if (fn_check_key($_REQUEST['key'], true)) {
-            fn_update_replain_settings(array('general' => array('id' => $_REQUEST['id'], 'new_activation' => 'Y')));
+        if (fn_check_key($_REQUEST['key'])) {
+            fn_update_replain_settings(['general' => ['id' => $_REQUEST['id']]]);
             if (Settings::instance()->getValue('secure_admin', '') == 'Y') {
                 $url = Registry::get('config.https_location');
             } else {

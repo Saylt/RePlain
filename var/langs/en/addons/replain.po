@@ -67,7 +67,3 @@ msgstr "Chat was successfully created"
 msgctxt "Languages::replain.improper_url"
 msgid "Unfortunately, chat for you store cannot be created automatically. Please create the chat manually using the bot here: <br><a href=\"[bot_url]\">[bot_url]</a><br> and paste the acquired code here:"
 msgstr "Unfortunately, chat for you store cannot be created automatically. Please create the chat manually using the bot here: <br><a href=\"[bot_url]\">[bot_url]</a><br> and paste the acquired code here:"
-
-msgctxt "Languages::replain.chat_properties"
-msgid "Chat properties"
-msgstr "Chat properties"

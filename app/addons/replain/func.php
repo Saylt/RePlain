@@ -17,11 +17,11 @@ if (!defined('BOOTSTRAP')) { die('Access denied'); }
 use Tygh\Settings;
 use Tygh\Registry;
 use Tygh\Http;
-use Tygh\Replain\BuildUrl as BuildUrl;
+use Tygh\Replain\BuildUrl;
 
 function fn_get_replain_settings() 
 {
-   $available_languages = array( 
+   $available_languages = [ 
             'English'                   => 0,
             'Русский'                   => 1,
             'Español'                   => 2,
@@ -33,7 +33,7 @@ function fn_get_replain_settings()
             'Oʻzbek tili'               => 8,
             'italiano'                  => 9,
             __('replain.autodetection') => -1
-            );
+            ];
 
     $replain_settings = fn_get_replain_addon_settings();
     $replain_settings['available_languages'] = $available_languages;
@@ -44,42 +44,54 @@ function fn_get_replain_settings()
 function fn_replain_create_chat($replain_settings)
 {
     if (isset($replain_settings['general']['raw_key'])) {
-        preg_match('/(var __REPLAIN_ = \')+([a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12})+(\';)/', $replain_settings['general']['raw_key'], $matches);
+        preg_match('/([a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12})/', $replain_settings['general']['raw_key'], $matches);
         unset($replain_settings['general']['raw_key']);
         if($matches) {
-            $replain_settings['general']['id'] = $matches[2];
-            $replain_settings['general']['activated'] = 'Y';
-            fn_set_notification('N', __('notice'), __('replain.activated'), 'I');
+            $replain_settings['general']['id'] = $matches[1];
         }
     } else {
+        $replain_settings = [];
         $replain_settings['general']['secret_key'] = substr(md5(serialize(rand())), 0, 13); //agreed with Re:plain team on 13 symbols for the secret key
-        $replain_settings['general']['activated'] = 'N';
     }
     fn_update_replain_settings($replain_settings);
+    return isset($replain_settings['general']['secret_key']) ? $replain_settings['general']['secret_key'] : true;
 }
 
-function fn_update_replain_settings($replain_settings)
+function fn_delete_replain_chat() {
+    $addon_settings = fn_get_replain_addon_settings();
+    foreach ($addon_settings['general'] as $k => $v) {
+        $addon_settings['general'][$k]['value'] = '';
+    }
+    $addon_settings['general']['active']['value'] = true;
+    
+    foreach($addon_settings['general'] as $option) {
+        Settings::instance()->updateValueById($option['object_id'], $option['value'], '', false, $addon_settings['company_id']);
+    }
+    
+}
+
+function fn_update_replain_settings($replain_settings = [])
 {
     $addon_settings = fn_get_replain_addon_settings();
 
-    if (isset($replain_settings['disabled'])) {
-    $addon_settings['general']['disabled']['value'] = $replain_settings['disabled'];
-        if($replain_settings['disabled']){
+    if (isset($replain_settings['active'])) {
+        $addon_settings['general']['active']['value'] = $replain_settings['active'];
+        if($replain_settings['active']){
             fn_set_notification('N', __('notice'), __('replain.disabled'), 'I');
         } else {
             fn_set_notification('N', __('notice'), __('replain.enabled'), 'I');
         }
+    } else {
+        $addon_settings['general']['active']['value'] = true;
     }
-    
-    foreach ($addon_settings['general'] as $k => $v) {
-        if (isset($replain_settings['general'])) {
+
+    if (isset($replain_settings['general'])) {
+        foreach ($addon_settings['general'] as $k => $v) {
             foreach ($replain_settings['general'] as $j => $i) {
                 if($k == $j) {
                     $addon_settings['general'][$k]['value'] = $i;
                 }
             }
-        } else {
-            $addon_settings['general'][$k]['value'] = '';
         }
     }
 
@@ -103,16 +115,13 @@ function fn_get_replain_addon_settings ()
     return $replain_settings;
 }
 
-function fn_check_key($key, $clear_key = false) 
+function fn_check_key($key) 
 {
     $addon_settings = fn_get_replain_addon_settings();
 
     if (!empty($addon_settings['general']['secret_key']['value'])) {
         if($addon_settings['general']['secret_key']['value'] == $key) {
-            if ($clear_key) {
-                $replain_settings['general']['secret_key'] = '';
-            }
-            $replain_settings['general']['activated'] = 'Y';
+            $replain_settings['general']['secret_key'] = '';
 
             fn_update_replain_settings($replain_settings);
             
@@ -120,12 +129,11 @@ function fn_check_key($key, $clear_key = false)
         } else {
             $replain_settings['general']['secret_key'] = '';
             fn_update_replain_settings($replain_settings);
+            return false;
         }
     } else {
-        if ($clear_key) {
-            $replain_settings['general']['secret_key'] = '';
-            fn_update_replain_settings($replain_settings);
-        }
+        $replain_settings['general']['secret_key'] = '';
+        fn_update_replain_settings($replain_settings);
         return false;
     }
 }

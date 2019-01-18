@@ -6,50 +6,16 @@
     <default_language>en</default_language>
     <priority>5000</priority>
     <status>active</status>
-
-    <authors>
-        <author>
-            <name>CS-Cart</name>
-            <email>contact@cs-cart.com</email>
-            <url>http://cs-cart.com</url>
-            <phone>+1 999 1234 5678</phone>
-        </author>
-    </authors>
-
     <compatibility>
         <core_version>
             <min>4.8.2</min>
         </core_version>
     </compatibility>
-
-    <!-- Reserved field -->
-    <license></license>
-
-    <!--Prepend or append the common tab list with add-on tabs (default defained as append)-->
-    <tab_order>prepend</tab_order>
-    
-    <!-- Add-on settings block. Optional.
-        @layout - Defines where the settings page will be opened (popup/separate). Optional attribute; "popup" by default
-    -->
-    <settings layout="separate" edition_type="ROOT,ULT:VENDOR">
-        <!-- List of tabs on the add-on settings page -->
+    <settings edition_type="ROOT,ULT:VENDOR">
         <sections>
-            <!-- Tab for settings.
-                @id - text identifier. This setting can be accessed later on through Registry::get('addons.[addon_id].[setting_id]')
-                @edition_type - list of editions in which the tab will be available. Optional
-            -->
             <section id="general">
-                <!-- List of settings in the tab -->
                 <items>
-                    <!-- Add-on settings
-                        @id - setting identifier.
-                        @edition_type - list of editions in which the setting will be available.
-                    -->
                     <item id="id">
-                        <type>hidden</type>
-                        <default_value></default_value>
-                    </item>
-                    <item id="langId">
                         <type>hidden</type>
                         <default_value></default_value>
                     </item>
@@ -57,17 +23,9 @@
                         <type>hidden</type>
                         <default_value></default_value>
                     </item>
-                    <item id="disabled">
+                    <item id="active">
                         <type>hidden</type>
-                        <default_value></default_value>
-                    </item>
-                    <item id="activated">
-                        <type>hidden</type>
-                        <default_value></default_value>
-                    </item>
-                    <item id="new_activation">
-                        <type>hidden</type>
-                        <default_value></default_value>
+                        <default_value>true</default_value>
                     </item>
                 </items>
             </section>
@@ -76,6 +34,6 @@
     <queries>
         <item editions="MULTIVENDOR,ULTIMATE">REPLACE INTO ?:privileges (privilege, is_default, section_id) VALUES ('manage_replain', 'Y', 'addons');</item>
         <item editions="MULTIVENDOR,ULTIMATE">REPLACE INTO  ?:privileges (privilege, is_default, section_id) VALUES ('manage_replain', 'Y', 'addons');</item>
-    <item for="uninstall" editions="MULTIVENDOR,ULTIMATE">DELETE FROM ?:privileges WHERE privilege LIKE 'manage_replain'</item>
+        <item for="uninstall" editions="MULTIVENDOR,ULTIMATE">DELETE FROM ?:privileges WHERE privilege LIKE 'manage_replain'</item>
     </queries>
 </addon>

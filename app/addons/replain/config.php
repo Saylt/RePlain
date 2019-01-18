@@ -18,4 +18,5 @@ if (!defined('BOOTSTRAP')) { die('Access denied'); }
 // Defined variables
 //
 
-define('REPLAIN_PROVIDER', 1);
+fn_define('REPLAIN_PROVIDER', 1);
+fn_define('REPLAIN_CONST', 5);

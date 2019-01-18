@@ -1,1 +1,1 @@
-{include file="buttons/button.tpl" but_text="{$but_text}" but_role=$but_role but_name=$but_name but_meta=$but_meta but_onclick=$but_onclick allow_href=true but_disabled=$disabled}
+{include file="buttons/button.tpl" but_text="{$but_text}" but_role=$but_role but_name=$but_name but_meta=$but_meta but_onclick=$but_onclick allow_href=true but_disabled=!$active}

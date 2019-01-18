@@ -67,7 +67,3 @@ msgstr "Чат был успешно создан"
 msgctxt "Languages::replain.improper_url"
 msgid "Unfortunately, chat for you store cannot be created automatically. Please create the chat manually using the bot here: <br><a href=\"[bot_url]\">[bot_url]</a><br> and paste the acquired code here:"
 msgstr "К сожалению, чат для данного магазина не может быть создан автоматически. Пожалуйста, создайте чат вручную, используя данного бота:: <br><a href=\"[bot_url]\">[bot_url]</a><br> и вставьте полученный от бота код в данное поле:"
-
-msgctxt "Languages::replain.chat_properties"
-msgid "Chat properties"
-msgstr "Настройки чата"
