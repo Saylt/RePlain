@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             list($protocol, $storefront_domain, $storefront_path) = fn_replain_get_url_setings();
             $query = REPLAIN_CONST . "_" . $storefront_domain . "_" . $protocol . "_" . $storefront_path . "_" . $langid . "_" . REPLAIN_PROVIDER . "_" . $secret_key;
 
-            if (urlencode($storefront_path) === $storefront_path && strlen($query) <= 14) {
+            if (urlencode($storefront_path) === $storefront_path && strlen($query) <= 64) {
                 header('Location: tg://resolve?domain=ReplainBot&start=' . $query);
             } else {
                 header('Location: ' . Registry::get("config.current_location") . "/" . Registry::get("config.admin_index") . '?dispatch=replain.manage&bot_url=Y');
