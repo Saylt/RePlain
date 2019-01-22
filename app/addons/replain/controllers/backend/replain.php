@@ -18,24 +18,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($mode == 'create' && (!empty($_REQUEST['replain_settings']))) {
         fn_replain_create_chat($_REQUEST['replain_settings']);
-    }  
+    }
     if ($mode == 'delete') {
-        fn_delete_replain_chat();
+        fn_replain_delete_chat();
     }
     if ($mode == 'disable') {
-        fn_update_replain_settings(['active' => false, 'general' => []]);
+        fn_replain_update_settings(['active' => false, 'general' => []]);
     }
     if ($mode == 'enable') {
-        fn_update_replain_settings(['general' => []]);
+        fn_replain_update_settings(['general' => []]);
     }
-    
-    return array(CONTROLLER_STATUS_OK, 'replain.manage');
+
+    return [CONTROLLER_STATUS_OK, 'replain.manage'];
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if ($mode == 'manage') {
-    
-        $replain_settings = fn_get_replain_settings();
+
+        $replain_settings = fn_replain_get_addon_settings();
 
         if(!empty($replain_settings['general']['script']['value'])) {
             Tygh::$app['view']->assign('active', $replain_settings['general']['active']['value']);

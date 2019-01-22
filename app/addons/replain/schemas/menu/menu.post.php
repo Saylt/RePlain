@@ -13,6 +13,9 @@
 ****************************************************************************/
 
 $schema['top']['addons']['items']['replain'] = array(
+    'attrs' => array(
+        'class'=>'is-addon'
+    ),   
     'href' => 'replain.manage',
     'position' => 1500
 );

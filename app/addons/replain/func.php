@@ -17,37 +17,29 @@ if (!defined('BOOTSTRAP')) { die('Access denied'); }
 use Tygh\Settings;
 use Tygh\Registry;
 
-function fn_get_replain_settings() 
-{
-    $replain_settings = fn_get_replain_addon_settings();
-
-    return $replain_settings;
-}
-
 function fn_replain_create_chat($replain_settings)
 {
     if (isset($replain_settings['general']['script'])) {
-        fn_update_replain_settings($replain_settings);
+        fn_replain_update_settings($replain_settings);
     }
 }
 
-function fn_delete_replain_chat() {
-    $addon_settings = fn_get_replain_addon_settings();
+function fn_replain_delete_chat() {
+    $addon_settings = fn_replain_get_addon_settings();
 
     foreach ($addon_settings['general'] as $k => $v) {
         $addon_settings['general'][$k]['value'] = '';
     }
     $addon_settings['general']['active']['value'] = true;
-    
+
     foreach($addon_settings['general'] as $option) {
         Settings::instance()->updateValueById($option['object_id'], $option['value'], '', false, $addon_settings['company_id']);
     }
-    
 }
 
-function fn_update_replain_settings($replain_settings = [])
+function fn_replain_update_settings($replain_settings = [])
 {
-    $addon_settings = fn_get_replain_addon_settings();
+    $addon_settings = fn_replain_get_addon_settings();
 
     if (isset($replain_settings['active'])) {
         $addon_settings['general']['active']['value'] = $replain_settings['active'];
@@ -75,13 +67,13 @@ function fn_update_replain_settings($replain_settings = [])
     }
 }
 
-function fn_get_replain_addon_settings () 
+function fn_replain_get_addon_settings()
 {
     $company_id = fn_allowed_for('ULTIMATE') ? Registry::get('runtime.company_id') : 0;
     $replain_settings_section = Settings::instance()->getSectionByName('replain', 'ADDON');
     $replain_settings = Settings::instance()->getList($replain_settings_section['section_id'], 0, false, $company_id);
     $replain_settings['company_id'] = $company_id;
-    
+
     foreach ($replain_settings['general'] as $k => $v) {
         unset($replain_settings['general'][$k]);
         $replain_settings['general'][$v['name']] = $v;

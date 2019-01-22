@@ -45,8 +45,13 @@ msgid "Chat was enabled"
 msgstr "Чат был включён"
 
 msgctxt "Languages::privileges.manage_replain"
+msgid "Can edit"
+msgstr "Может изменять"
+
+msgctxt "Languages::privilege_groups.replain"
 msgid "Manage Re:plain chat"
-msgstr "Управеление чатом Re:plain"
+msgstr "Управление чатом Re:plain"
+
 
 msgctxt "Languages::replain.insert_script"
 msgid "Please create the chat using the bot here: <br><a href=\"[bot_url]\">[bot_url]</a><br> and paste the acquired code here:"

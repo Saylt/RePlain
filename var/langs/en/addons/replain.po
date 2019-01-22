@@ -45,6 +45,10 @@ msgid "Chat was enabled"
 msgstr "Chat was enabled"
 
 msgctxt "Languages::privileges.manage_replain"
+msgid "Can edit"
+msgstr "Can edit"
+
+msgctxt "Languages::privilege_groups.replain"
 msgid "Manage Re:plain chat"
 msgstr "Manage Re:plain chat"
 
