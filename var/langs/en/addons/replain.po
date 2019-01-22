@@ -53,5 +53,5 @@ msgid "Add/remove Re:plain chat"
 msgstr "Add/remove Re:plain chat"
 
 msgctxt "Languages::replain.insert_script"
-msgid "Here is how to set up Telegram chat:<br>1. Make sure Telegram is installed on your device.<br>2. Use <a href=\"[bot_url]\">Re:plain bot</a> to create the chat.<br> 3. Paste the code acquired from the bot into the field below to connect the chat to your store:"
-msgstr "Here is how to set up Telegram chat:<br>1. Make sure Telegram is installed on your device.<br>2. Use <a href=\"[bot_url]\">Re:plain bot</a> to create the chat.<br> 3. Paste the code acquired from the bot into the field below to connect the chat to your store:"
+msgid "Here is how to set up Telegram chat:<br>1. Make sure Telegram is installed on your device.<br>2. Use <a href=\"[bot_url]\">Re:plain bot</a> to create a chat.<br> 3. Paste the code acquired from the bot into the field below to connect the chat to your store:"
+msgstr "Here is how to set up Telegram chat:<br>1. Make sure Telegram is installed on your device.<br>2. Use <a href=\"[bot_url]\">Re:plain bot</a> to create a chat.<br> 3. Paste the code acquired from the bot into the field below to connect the chat to your store:"
