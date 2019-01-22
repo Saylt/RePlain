@@ -8,7 +8,7 @@
     <status>active</status>
     <compatibility>
         <core_version>
-            <min>4.8.2</min>
+            <min>4.10.1</min>
         </core_version>
     </compatibility>
     <settings edition_type="ROOT,ULT:VENDOR">
