@@ -12,25 +12,13 @@ msgctxt "Addons::description::replain"
 msgid "Allows to add the Telegram chat to your storefront"
 msgstr "Allows to add the Telegram chat to your storefront"
 
-msgctxt "Languages::replain.langid"
-msgid "New chat Language"
-msgstr "New chat Language"
-
-msgctxt "Languages::replain.autodetection"
-msgid "Autodetection"
-msgstr "Autodetection"
-
-msgctxt "Languages::replain.click_to_activate"
-msgid "Click this link to activate the created chat"
-msgstr "Click this link to activate the created chat"
-
 msgctxt "Languages::replain"
 msgid "Re:plain"
 msgstr "Re:plain"
 
-msgctxt "Languages::replain.new_chat"
-msgid "Create new chat"
-msgstr "Create new chat"
+msgctxt "Languages::replain.manage_chat"
+msgid "Manage chat"
+msgstr "Manage chat"
 
 msgctxt "Languages::replain.create_chat"
 msgid "Create chat"
@@ -60,14 +48,6 @@ msgctxt "Languages::privileges.manage_replain"
 msgid "Manage Re:plain chat"
 msgstr "Manage Re:plain chat"
 
-msgctxt "Languages::replain.activated"
-msgid "Chat was successfully created"
-msgstr "Chat was successfully created"
-
-msgctxt "Languages::replain.improper_url"
-msgid "Unfortunately, chat for you store cannot be created automatically. Please create the chat manually using the bot here: <br><a href=\"[bot_url]\">[bot_url]</a><br> and paste the acquired code here:"
-msgstr "Unfortunately, chat for you store cannot be created automatically. Please create the chat manually using the bot here: <br><a href=\"[bot_url]\">[bot_url]</a><br> and paste the acquired code here:"
-
-msgctxt "Languages::replain.chat_properties"
-msgid "Chat properties"
-msgstr "Chat properties"
+msgctxt "Languages::replain.insert_script"
+msgid "Please create the chat using the bot here: <br><a href=\"[bot_url]\">[bot_url]</a><br> and paste the acquired code here:"
+msgstr "Please create the chat using the bot here: <br><a href=\"[bot_url]\">[bot_url]</a><br> and paste the acquired code here:"
