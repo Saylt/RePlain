@@ -43,9 +43,9 @@ function fn_replain_update_settings($replain_settings = [])
 
     if (isset($replain_settings['active'])) {
         $addon_settings['general']['active']['value'] = $replain_settings['active'];
-        if($replain_settings['active']){
+        if($replain_settings['active'] === false) {
             fn_set_notification('N', __('notice'), __('replain.disabled'), 'I');
-        } else {
+        } elseif ($replain_settings['active'] === true) {
             fn_set_notification('N', __('notice'), __('replain.enabled'), 'I');
         }
     } else {

@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         fn_replain_update_settings(['active' => false, 'general' => []]);
     }
     if ($mode == 'enable') {
-        fn_replain_update_settings(['general' => []]);
+        fn_replain_update_settings(['active' => true, 'general' => []]);
     }
 
     return [CONTROLLER_STATUS_OK, 'replain.manage'];
